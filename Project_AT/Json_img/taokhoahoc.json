@@ -1,9 +1,21 @@
 [
     {
+	  "hinh_anh": "images.jpg",
       "ten_khoahoc": "Công nghệ thông tin",
       "mota_khoahoc": "Ngành Công nghệ thông tin (Information Technology) là ngành học sử dụng máy tính và phần mềm máy tính để chuyển đổi, lưu trữ, bảo vệ, xử lý, truyền và thu thập thông tin."
-      
+    },
+    
+	 {
+		"hinh_anh": "image4.jpg",
+      "ten_khoahoc": "Kỹ thuật phần mềm",
+      "mota_khoahoc": "Kỹ thuật phần mềm (Software Engineering) là ngành học nghiên cứu về quy trình, phương pháp và công cụ để phát triển phần mềm chất lượng cao và hiệu quả."
+    },
+    {
+		"hinh_anh": "image5.jpg",
+      "ten_khoahoc": "Trí tuệ nhân tạo",
+      "mota_khoahoc": "Trí tuệ nhân tạo (Artificial Intelligence) là ngành học nghiên cứu về việc tạo ra các hệ thống máy tính có khả năng thực hiện các nhiệm vụ mà thường yêu cầu trí thông minh con người, như nhận diện hình ảnh, xử lý ngôn ngữ tự nhiên và học máy."
     }
+	
 	
 	
 ]

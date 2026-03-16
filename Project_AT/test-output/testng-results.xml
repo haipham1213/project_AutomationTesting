@@ -2,36 +2,36 @@
 <testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-03-08T03:07:18 GMT+07:00" name="Default suite" finished-at="2026-03-08T03:08:44 GMT+07:00" duration-ms="86007">
+  <suite started-at="2026-03-17T03:25:23 GMT+07:00" name="Default suite" finished-at="2026-03-17T03:26:40 GMT+07:00" duration-ms="77645">
     <groups>
     </groups>
-    <test started-at="2026-03-08T03:07:18 GMT+07:00" name="Default test" finished-at="2026-03-08T03:08:44 GMT+07:00" duration-ms="86007">
+    <test started-at="2026-03-17T03:25:23 GMT+07:00" name="Default test" finished-at="2026-03-17T03:26:40 GMT+07:00" duration-ms="77645">
       <class name="TestNG.Giao_Dien_Hoc_Vien">
-        <test-method is-config="true" signature="beforeTest()[pri:0, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-08T03:07:18 GMT+07:00" name="beforeTest" finished-at="2026-03-08T03:07:24 GMT+07:00" duration-ms="5956" status="PASS">
+        <test-method is-config="true" signature="beforeTest()[pri:0, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-17T03:25:23 GMT+07:00" name="beforeTest" finished-at="2026-03-17T03:25:25 GMT+07:00" duration-ms="2235" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method signature="TC1()[pri:1, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-08T03:07:24 GMT+07:00" name="TC1" finished-at="2026-03-08T03:08:17 GMT+07:00" duration-ms="53030" status="PASS">
+        <test-method signature="TC1()[pri:1, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-17T03:25:25 GMT+07:00" name="TC1" finished-at="2026-03-17T03:26:17 GMT+07:00" duration-ms="52257" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC1 -->
-        <test-method signature="TC2()[pri:2, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-08T03:08:17 GMT+07:00" name="TC2" finished-at="2026-03-08T03:08:20 GMT+07:00" duration-ms="2634" status="PASS">
+        <test-method signature="TC2()[pri:2, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-17T03:26:17 GMT+07:00" name="TC2" finished-at="2026-03-17T03:26:17 GMT+07:00" duration-ms="182" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC2 -->
-        <test-method signature="TC3()[pri:3, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-08T03:08:20 GMT+07:00" name="TC3" finished-at="2026-03-08T03:08:20 GMT+07:00" duration-ms="159" status="PASS">
+        <test-method signature="TC3()[pri:3, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-17T03:26:17 GMT+07:00" name="TC3" finished-at="2026-03-17T03:26:17 GMT+07:00" duration-ms="157" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC3 -->
-        <test-method signature="TC4()[pri:4, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-08T03:08:20 GMT+07:00" name="TC4" finished-at="2026-03-08T03:08:21 GMT+07:00" duration-ms="1000" status="PASS">
+        <test-method signature="TC4()[pri:4, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-17T03:26:17 GMT+07:00" name="TC4" finished-at="2026-03-17T03:26:18 GMT+07:00" duration-ms="1000" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC4 -->
-        <test-method signature="TC5()[pri:5, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-08T03:08:21 GMT+07:00" name="TC5" finished-at="2026-03-08T03:08:44 GMT+07:00" duration-ms="23002" status="PASS">
+        <test-method signature="TC5()[pri:5, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-17T03:26:18 GMT+07:00" name="TC5" finished-at="2026-03-17T03:26:40 GMT+07:00" duration-ms="21586" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC5 -->
-        <test-method is-config="true" signature="afterTest()[pri:0, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-08T03:08:44 GMT+07:00" name="afterTest" finished-at="2026-03-08T03:08:44 GMT+07:00" duration-ms="174" status="PASS">
+        <test-method is-config="true" signature="afterTest()[pri:0, instance:TestNG.Giao_Dien_Hoc_Vien@2cd2a21f]" started-at="2026-03-17T03:26:40 GMT+07:00" name="afterTest" finished-at="2026-03-17T03:26:40 GMT+07:00" duration-ms="163" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTest -->
