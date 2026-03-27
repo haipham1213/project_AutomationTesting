@@ -5,9 +5,14 @@
     <classes>
       <class name="TestNG.Them_CapNhatKhoaHoc">
         <methods>
+          <include name="TC4"/>
+          <include name="TC1"/>
+          <include name="TC1_3"/>
           <include name="afterTest"/>
           <include name="TC2"/>
           <include name="TC1_1"/>
+          <include name="TC1_4"/>
+          <include name="TC5"/>
           <include name="beforeTest"/>
           <include name="TC1_2"/>
         </methods>

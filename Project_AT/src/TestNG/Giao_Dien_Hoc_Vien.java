@@ -129,9 +129,30 @@ public class Giao_Dien_Hoc_Vien {
         learningPage.closeVideoIcon(1, 3);
         learningPage.closeVideoIcon(2, 1);
 
-        WebDriverWait wait =  new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[contains(@src,'youtube.com')]")));
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.ytp-large-play-button"))).click();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        
+
+     // tìm đúng iframe chứa video
+     List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
+
+     for (WebElement frame : iframes) {
+         driver.switchTo().defaultContent();
+         driver.switchTo().frame(frame);
+
+         if (driver.findElements(By.id("movie_player")).size() > 0) {
+             System.out.println("ĐÃ VÀO ĐÚNG IFRAME VIDEO");
+             break;
+         }
+     }
+
+     // đợi nút play
+     WebElement playBtn = wait.until(ExpectedConditions.elementToBeClickable(
+         By.xpath("//button[contains(@class,'ytp-large-play-button')]")
+     ));
+
+     playBtn.click();
+        
         Thread.sleep(5000);
     }
 

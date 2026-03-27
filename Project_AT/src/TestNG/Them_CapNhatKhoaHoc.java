@@ -5,6 +5,13 @@ import pages.CoursePage;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.FileReader;
 import java.util.Arrays;
 import java.util.List;
@@ -69,8 +76,8 @@ public class Them_CapNhatKhoaHoc {
             Thread.sleep(1000);
             coursePage.clickConfirm();
             Thread.sleep(1000);
-            coursePage.goToCourseMenu();
-            Thread.sleep(1000);
+            //coursePage.goToCourseMenu();
+            //Thread.sleep(1000);
             
             
         }
@@ -143,20 +150,114 @@ public class Them_CapNhatKhoaHoc {
         coursePage.addLesson2ToChapter3("Bài 2: Xem kết quả", "Cách tra cứu điểm số.");
         Thread.sleep(2000);
         
-        // 5. Lưu toàn bộ
+        
+        coursePage.clickThemTaiLieu();
+        Thread.sleep(3000);
+        coursePage.selectRadioBtnTaiLieu();
+        Thread.sleep(3000);
+        coursePage.selectExerciseByName();
+        Thread.sleep(3000);
+        coursePage.clickTime();
+        Thread.sleep(3000);
+        coursePage.clickSetTime();
+        Thread.sleep(3000);
+        coursePage.clickSetTimeEnd();
+        Thread.sleep(3000);
+        coursePage.clickSaveBT3();
+		
+        
+        // 5. Lưu toàn bộ	
         coursePage.saveAndConfirm();
         Thread.sleep(2000);
         coursePage.clickConfirmDialog();
         Thread.sleep(1000);
         
     }
+    @Test(priority = 4)
+    public void TC1_3 () throws Exception{	 
+    	String projectPath = "C:\\Users\\hh\\git\\repository\\Project_AT\\Json_img\\";
+        // 1. Đọc file JSON (JSONArray vì có 3 đối tượng)
+        JSONParser parser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(projectPath + "diendan.json"));
+        // 2. Vào trang diễn đàn (Chỉ thực hiện 1 lần trước khi lặp)
+        driver.findElement(By.xpath("/html/body/div/div/div/main/div/div/div/div[1]/div/div[2]/div/div[4]")).click();
+        Thread.sleep(2000);
+        System.out.println("======= BẮT ĐẦU TẠO " + jsonArray.size() + " BÀI VIẾT =======");
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JSONObject data = (JSONObject) jsonArray.get(i);
+            String ten = (String) data.get("ten");
+            String mota = (String) data.get("mota");
+            String hinhAnh = (String) data.get("image");
+            String fullPathImg = projectPath + hinhAnh;
+            System.out.println("Đang tạo bài thứ " + (i + 1) + ": " + ten);
+            // A. Click Thêm diễn đàn mới
+            driver.findElement(By.xpath("//button[contains(.,'Thêm diễn đàn mới')]")).click();
+            Thread.sleep(1500);
+            // B. Điền thông tin từ JSON
+            driver.findElement(By.xpath("//input[@name='name_conversation']")).sendKeys(ten);
+            driver.findElement(By.xpath("//textarea[@name='des_conversation']")).sendKeys(mota);
+            Thread.sleep(1000);
+            // C. Upload hình ảnh bằng Robot
+            driver.findElement(By.xpath("//button[@aria-label='prepend icon']")).click();
+            Thread.sleep(2000); 
+            StringSelection select = new StringSelection(fullPathImg);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(select, null);
+   
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            
+            Thread.sleep(3000); // Đợi ảnh load lên
+
+            // D. Nhấn TAB để di chuyển và nhấn ENTER (theo logic Robot của bạn)
+            for (int j = 0; j < 3; j++) {
+                robot.keyPress(KeyEvent.VK_TAB);
+                robot.keyRelease(KeyEvent.VK_TAB);
+                Thread.sleep(300);
+            }
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(2000);
+
+            // E. Click nút Lưu/Xác nhận cuối cùng
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[6]/button[1]")).click();
+    
+            
+            Thread.sleep(2000); 
+        }
+    }
+    @Test(priority = 5)
+    public void TC1_4() throws Exception {
+    	coursePage.clickVideoConference();
+    	Thread.sleep(1000);	
+    	coursePage.clickThemVideo();
+    	Thread.sleep(1000);
+    	coursePage.fillVideoInfo("Hội thảo E-Learning", "Hoi thảo về các xu hướng mới trong E-Learning.", "https://meet.google.com/rwx-kcek-pna");
+    	 Robot robot = new Robot();
+    	 for (int j = 0; j < 2; j++) {
+             robot.keyPress(KeyEvent.VK_TAB);
+             robot.keyRelease(KeyEvent.VK_TAB);
+             Thread.sleep(300);
+         }
+		 robot.keyPress(KeyEvent.VK_ENTER);
+		 robot.keyRelease(KeyEvent.VK_ENTER);
+		 Thread.sleep(1000);
+
+    	coursePage.clickConfirm();
+    }
+    
+    
     
     
     
     
     
     // TC3: Tìm kiếm khóa học
-    @Test(priority = 5)
+    @Test(priority = 7)
     public void TC3() throws Exception {
     	Thread.sleep(1000);
     	coursePage.txtSearchCourse("Database_nhom3");
@@ -164,7 +265,7 @@ public class Them_CapNhatKhoaHoc {
     }
     
     // TC4: Cập nhật nội dung khóa học
-    @Test(priority = 6)
+    @Test(priority = 8)
     public void TC4() throws Exception {
         coursePage.selectDatabaseCourse();
         Thread.sleep(1000);
@@ -187,12 +288,12 @@ public class Them_CapNhatKhoaHoc {
         }
     }
     
-    @Test(priority = 4)
+    @Test(priority = 6)
     public void TC2() throws Exception {
         coursePage.goToCourseMenu();
         Thread.sleep(1000);
-        coursePage.clickConfirmGo();
-        Thread.sleep(1000);
+        //coursePage.clickConfirmGo();
+        //Thread.sleep(1000);
     	coursePage.deleteCourse();
     	Thread.sleep(1000);
     	coursePage.btnConfirmDelete();
@@ -200,7 +301,7 @@ public class Them_CapNhatKhoaHoc {
     	coursePage.clickConfirm();
     }
     // TC5: so sánh
-    @Test(priority = 7 )
+    @Test(priority = 9 )
     public void TC5() throws Exception {
     	// --- Điều hướng và chuẩn bị ---
         coursePage.goToCourseMenu();
@@ -233,7 +334,7 @@ public class Them_CapNhatKhoaHoc {
         System.out.println((actDate.equals(expDate) ? "KHỚP" : "KHÔNG KHỚP") + " | Ngày: " + actDate);		
     }
     
-    @Test(priority = 8)
+    @Test(priority = 10)
     public void TC_6() throws Exception {
         SoftAssert softAssert = new SoftAssert();
         String projectPath = "C:\\Users\\hh\\git\\repository\\Project_AT\\Json_img\\";
@@ -271,6 +372,6 @@ public class Them_CapNhatKhoaHoc {
 
     @AfterTest
     public void afterTest() {
-        driver.quit();
+        driver.close();
     }
 }
