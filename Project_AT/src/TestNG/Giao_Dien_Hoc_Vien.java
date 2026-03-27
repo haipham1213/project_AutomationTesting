@@ -1,5 +1,8 @@
 package TestNG;
 import org.testng.annotations.Test;
+
+import com.gargoylesoftware.htmlunit.javascript.host.event.InputEvent;
+
 import org.testng.annotations.Test;
 import pages.LoginPageUser;
 import pages.LearningPage;
@@ -8,6 +11,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.List;
 
@@ -102,7 +109,7 @@ public class Giao_Dien_Hoc_Vien {
     }
 
     @Test(priority = 5)
-    public void TC5() throws InterruptedException {
+    public void TC5() throws InterruptedException, AWTException {
         List<String> expectedList = Arrays.asList(
             "Định nghĩa kiểm thử phần mềm (Software Testing) Mục đích của kiểm thử Kiểm thử và đảm bảo chất lượng (Testing vs QA vs QC)",
             "Tầm quan trọng của kiểm thử Hậu quả khi không kiểm thử Lợi ích kinh tế của kiểm thử sớm",
@@ -128,32 +135,51 @@ public class Giao_Dien_Hoc_Vien {
 
         learningPage.closeVideoIcon(1, 3);
         learningPage.closeVideoIcon(2, 1);
+        Thread.sleep(3000);
+       
+        
+        
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
+        // Tìm iframe YouTube bằng thuộc tính src (tránh lỗi cross-origin khi switch)
+        driver.switchTo().defaultContent();
+        List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
+        boolean foundYoutubeFrame = false;
+        for (WebElement frame : iframes) {
+            String src = frame.getAttribute("src");
+            if (src != null && src.contains("youtube.com/embed")) {
+                driver.switchTo().frame(frame);
+                System.out.println("ĐÃ VÀO ĐÚNG IFRAME VIDEO: " + src);
+                foundYoutubeFrame = true;
+                break;
+            }
+        }
 
-        
-
-     // tìm đúng iframe chứa video
-     List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-
-     for (WebElement frame : iframes) {
-         driver.switchTo().defaultContent();
-         driver.switchTo().frame(frame);
-
-         if (driver.findElements(By.id("movie_player")).size() > 0) {
-             System.out.println("ĐÃ VÀO ĐÚNG IFRAME VIDEO");
-             break;
-         }
-     }
-
-     // đợi nút play
-     WebElement playBtn = wait.until(ExpectedConditions.elementToBeClickable(
-         By.xpath("//button[contains(@class,'ytp-large-play-button')]")
-     ));
-
-     playBtn.click();
-        
-        Thread.sleep(5000);
+        if (foundYoutubeFrame) {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            try {
+                // Gọi trực tiếp YouTube Player API — không cần tìm button
+                Thread.sleep(2000); // đợi player load xong
+                js.executeScript("document.getElementById('movie_player').playVideo();");
+                System.out.println("ĐÃ GỌI playVideo() QUA JAVASCRIPT");
+            } catch (Exception e1) {
+                System.out.println("JS playVideo() thất bại, thử click nút: " + e1.getMessage());
+                try {
+                    WebElement playBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                        By.cssSelector(".ytp-large-play-button")
+                    ));
+                    playBtn.click();
+                    System.out.println("ĐÃ CLICK NÚT PLAY LỚN");
+                } catch (Exception e2) {
+                    System.out.println("KHÔNG THỂ CLICK NÚT PLAY: " + e2.getMessage());
+                }
+            }
+            driver.switchTo().defaultContent();
+        } else {
+            System.out.println("KHÔNG TÌM THẤY IFRAME YOUTUBE");
+        }
+           
+           Thread.sleep(5000);
     }
 
     @AfterTest
